@@ -1,319 +1,278 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramadan Countdown</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>FACEBOOK LIVE UID CHECKER</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!-- Add jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(45deg, #6a11cb, #2575fc); 
-            color: white;
-            text-align: center;
+            background: url('https://i.ibb.co.com/P5WhjqD/1j6F.gif') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(0px); /* Optional: Add blur to the background */
+            color: #fff;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            transition: background-color 0.3s ease-in-out;
         }
 
-        h1 {
-            font-size: 3.5em;
-            margin-top: 60px;
-            letter-spacing: 2px;
-            color: #fff;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-        }
-
-        #countdown {
-            font-size: 4.5em;
+        .btn {
             font-weight: bold;
-            margin-top: 40px;
-            color: #ffcc00; 
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            animation: countdownAnimation 1s ease-in-out infinite;
         }
 
-        @keyframes countdownAnimation {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .message {
-            font-size: 2em;
-            color: #00e676;
-            margin-top: 20px;
-        }
-
-        .tip {
-            font-size: 1.5em;
-            color: #ffcc00;
-            margin-top: 30px;
-            font-weight: 600;
-            padding: 15px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            font-size: 1.2em;
-            color: white;
-            opacity: 0.8;
-            margin-top: 20px;
-        }
-
-        .footer a {
-            color: #ffcc00;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        .footer-icons {
-            margin-top: 10px;
-        }
-
-        .footer-icons a {
-            color: #ffcc00;
-            margin: 0 10px;
-            font-size: 1.5em;
-            text-decoration: none;
-        }
-
-        .footer-icons a:hover {
+        .title-of-site {
             color: #fff;
         }
 
-        .salam {
-            font-size: 1.8em;
-            color: #ffcc00;
-            margin-top: 30px;
-            font-weight: 600;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        .bg-primary {
+            background-color: #007bff !important;
         }
 
-        /* Dark/Light Theme */
-        body.dark-theme {
-            background: linear-gradient(45deg, #333, #555); 
+        .bg-success {
+            background-color: #28a745 !important;
         }
 
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px;
-            background-color: #ffcc00;
+        .bg-danger {
+            background-color: #dc3545 !important;
+        }
+
+        .bg-warning {
+            background-color: #ffc107 !important;
+        }
+
+        textarea {
+            width: 200px;
+        }
+
+        .form-label {
+            color: #28a745;
+        }
+
+        .form-control {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        .form-control:focus {
+            background-color: #555;
+            color: #fff;
+            border-color: #28a745;
+        }
+
+        button {
+            background-color: #555;
             color: #fff;
             border: none;
-            cursor: pointer;
-            font-weight: 600;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+        button:hover {
+            background-color: #28a745;
+        }
+
+        .glowing-text {
+            font-size: 20px;
+            font-weight: bold;
             color: #fff;
-            text-align: center;
-            padding: 20px;
-            z-index: 999;
+            animation: glow 1.5s infinite;
         }
 
-        .modal-content {
-            background-color: #222;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .modal-button {
-            padding: 10px 20px;
-            background-color: #ffcc00;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            border-radius: 5px;
-        }
-
-        .modal-button:hover {
-            background-color: #fbbd08;
-        }
-
-        /* Scroll to Top Button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 20px;
-            display: none;
-            background-color: #ffcc00;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 1.2em;
-        }
-
-        .scroll-to-top:hover {
-            background-color: #fbbd08;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px rgb(255, 3, 121), 0 0 10px rgb(76, 175, 80), 0 0 20px rgb(76, 175, 80);
             }
-
-            #countdown {
-                font-size: 3.5em;
+            50% {
+                text-shadow: 0 0 20px rgb(76, 175, 80), 0 0 30px rgb(76, 175, 80), 0 0 40px rgb(76, 175, 80);
             }
-
-            .message {
-                font-size: 1.8em;
-            }
-
-            .tip {
-                font-size: 1.2em;
-            }
-
-            .salam {
-                font-size: 1.5em;
-            }
-
-            .footer {
-                font-size: 1em;
+            100% {
+                text-shadow: 0 0 5px rgb(76, 175, 80), 0 0 10px rgb(76, 175, 80), 0 0 20px rgb(76, 175, 80);
             }
         }
+
     </style>
 </head>
+
 <body>
-    <!-- Language Selector -->
-    <select id="language-select" onchange="changeLanguage()">
-        <option value="en">English</option>
-        <option value="ar">Arabic</option>
-        <option value="bn">Bengali</option>
-    </select>
+    <div class="row">
+        <div class="d-flex flex-wrap justify-content-center align-items-center" style="text-align: center; position: relative;">
+            <h1 class="title-of-site" style="font-size: 2.5rem; color: #fff; text-shadow: 0 0 5px #f48a00, 0 0 10px #00b8f4, 0 0 15px #00b8f4;">
+                <i class="icofont-check-circled"></i> FB LIVE UID CHECKER
+            </h1>
+        </div>
 
-    <!-- Islamic Date Display -->
-    <div id="islamic-date"></div>
 
-    <!-- Countdown Section -->
-    <div class="container">
-        <div class="salam">Assalamualaikum and welcome!</div>
-        <h1>Countdown to Ramadan</h1>
-        <div id="countdown"></div>
-        <div class="message" id="message"></div>
-    </div>
-
-    <!-- Tips Section -->
-    <div class="tip" id="ramadan-tip">
-        Tip of the Day: <br> "Ramadan is a time of reflection, patience, and self-restraint. Make the most of it by increasing your prayers and good deeds!"
-    </div>
-
-    <div class="footer">
-        <p>Powered by <a href="#">NAYEEM</a></p>
-        <!-- Footer Social Media Icons -->
-        <div class="footer-icons">
-            <a href="#" title="Facebook" target="_blank">🌐</a>
-            <a href="#" title="Twitter" target="_blank">🐦</a>
-            <a href="#" title="Instagram" target="_blank">📸</a>
+        <div class="col-12 d-flex justify-content-center">
+            <div class="d-flex">
+                <span class="btn mx-1 px-4 py-3 border rounded bg-primary text-white fw-bold" id="btnStart">
+                    <i class="icofont-ui-play"></i>
+                    Run
+                </span>
+                <span class="mx-1 px-4 py-3 border rounded bg-success text-white fw-bold">
+                    Live: <span id="liveCount">0</span>
+                </span>
+                <span class="mx-1 px-4 py-3 border rounded bg-danger text-white fw-bold">
+                    Dead: <span id="dieCount">0</span>
+                </span>
+                <span class="mx-1 px-4 py-3 border rounded bg-warning text-white fw-bold">
+                    Checked: <span id="totalCount">0</span> account
+                </span>
+            </div>
         </div>
     </div>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scrollToTopBtn" onclick="scrollToTop()">↑</button>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="mb-3">
+                <div class="d-flex justify-content-between mb-2">
+                    <label for="" class="form-label fw-bold text-success">Enter a list of UIDs, one for each UID</label>
+                </div>
+                <textarea class="form-control" name="" id="listId" rows="10" autofocus></textarea>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <label for="" class="form-label fw-bold text-success">List of Live accounts</label>
+                            <button class="btn btn-secondary btn-sm" id="btnCopyLive"><b>Copy</b></button>
+                        </div>
+                        <textarea class="form-control" readonly name="" id="listLive" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <label for="" class="form-label fw-bold text-danger">List of Dead accounts</label>
+                            <button class="btn btn-secondary btn-sm" id="btnCopyDie"><b>Copy</b></button>
+                        </div>
+                        <textarea class="form-control" readonly name="" id="listDie" rows="10"></textarea>
+    <div class="row">
+        <div class="d-flex flex-wrap justify-content-center align-items-center" style="text-align: center; position: relative;">
+            <h1 class="title-of-site" style="font-size: 2.5rem; color: #fff; text-shadow: 0 0 5px #f48a00, 0 0 10px #00b8f4, 0 0 15px #00b8f4;">
+                <i class="icofont-check-circled"></i> DARK SERIES XYLON
+            </h1>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        const translations = {
-            en: {
-                greeting: "Assalamualaikum and welcome!",
-                countdownTitle: "Countdown to Ramadan",
-                countdownMessage: "Happy Ramadan to you and your loved ones!"
-            },
-            ar: {
-                greeting: "السلام عليكم ومرحبا!",
-                countdownTitle: "العد التنازلي لشهر رمضان",
-                countdownMessage: "رمضان مبارك لكم ولأحبائكم!"
-            },
-            bn: {
-                greeting: "আসসালামু আলাইকুম এবং স্বাগতম!",
-                countdownTitle: "রমজান কাউন্টডাউন",
-                countdownMessage: "আপনাদের এবং আপনার প্রিয়জনদের রমজান মোবারক!"
+        $(function() {
+            $("#btnCopyLive").click(function() {
+                $("#listLive").select();
+                document.execCommand('copy');
+            });
+
+            $("#btnCopyDie").click(function() {
+                $("#listDie").select();
+                document.execCommand('copy');
+            });
+
+            let live = 0;
+            let dies = 0;
+            let c = 0;
+            let n;
+            let arrclone;
+
+            $('#btnStart').click(() => {
+                if (!$('#listId').val().trim()) {
+                    return;
+                }
+
+                // Disable the start button to prevent re-clicking
+                $('#btnStart').prop('disabled', true);
+
+                // Reset the lists and counters
+                $("#listLive").val('');  // Ensure it's set to empty
+                $("#listDie").val('');   // Ensure it's set to empty
+                $("#liveCount").html(0);  // Reset live count to 0
+                $("#dieCount").html(0);   // Reset dead count to 0
+                $("#totalCount").html(0); // Reset total count to 0
+
+                dies = 0;
+                live = 0;
+                n = 0;
+
+                let data = $('#listId').val().split(/\r?\n/);
+                data = [...new Set(data)]; // Remove duplicates
+                data = data.filter(nx => nx); // Remove empty lines
+                arrclone = data;
+                c = arrclone.length;
+
+                $("#totalCount").html(c);
+
+                // Run the checking process 20 times concurrently
+                for (let i = 0; i < 20; i++) {
+                    check_live_uid_progress();
+                }
+
+                $("#listId").val(data.join("\n"));
+            });
+
+            function check_live_uid_progress() {
+                $("#dieCount").html(dies);
+                n = n + 1;
+                var m = n - 1;
+
+                if (!arrclone[m]) return;
+                var uid = get_uid(arrclone[m]);
+                var url = 'https://graph.facebook.com/' + uid + '/picture?type=normal';
+
+                fetch(url).then((response) => {
+                    if (/100x100/.test(response.url)) {
+                        live++;
+                        $('#liveCount').html(live);
+                        // Use val() to modify the textarea content
+                        var currentLiveContent = $('#listLive').val();
+                        $('#listLive').val(currentLiveContent + arrclone[m] + "\n");
+                    } else {
+                        dies++;
+                        $('#dieCount').html(dies);
+                        // Use val() to modify the textarea content
+                        var currentDieContent = $('#listDie').val();
+                        $('#listDie').val(currentDieContent + arrclone[m] + "\n");
+                    }
+
+                    // Continue checking if there are more UIDs
+                    if (n < c) {
+                        check_live_uid_progress();
+                    } else {
+                        // Re-enable the start button once done
+                        $('#btnStart').prop('disabled', false);
+                    }
+                }).catch((err) => {
+                    console.error("Error fetching UID: ", err);
+                    dies++; // Count as dead if an error occurs
+                    $('#dieCount').html(dies);
+                    var currentDieContent = $('#listDie').val();
+                    $('#listDie').val(currentDieContent + arrclone[m] + "\n");
+                    if (n < c) {
+                        check_live_uid_progress();
+                    } else {
+                        $('#btnStart').prop('disabled', false);
+                    }
+                });
             }
-        };
 
-        function changeLanguage() {
-            const selectedLanguage = document.getElementById('language-select').value;
-            document.querySelector('.salam').innerHTML = translations[selectedLanguage].greeting;
-            document.querySelector('h1').innerHTML = translations[selectedLanguage].countdownTitle;
-            document.getElementById('message').innerHTML = translations[selectedLanguage].countdownMessage;
-        }
-
-        async function fetchIslamicDate() {
-            const response = await fetch('https://api.aladhan.com/v1/gToH?date=' + new Date().toISOString().split('T')[0]);
-            const data = await response.json();
-            const islamicDate = data.data.hijri.date + " " + data.data.hijri.month.en + " " + data.data.hijri.year;
-            document.getElementById('islamic-date').innerHTML = "Islamic Date: " + islamicDate;
-        }
-
-        fetchIslamicDate(); 
-
-        const ramadanDate = new Date('March 1, 2025 00:00:00').getTime();
-
-        const countdown = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = ramadanDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-            if (distance < 0) {
-                clearInterval(countdown);
-                document.getElementById("countdown").innerHTML = "Ramadan Mubarak!";
-                document.getElementById("message").innerHTML = "Happy Ramadan to you and your loved ones!";
+            function get_uid(data) {
+                if (data && data.includes("|")) {
+                    var clone = data.split("|");
+                    return clone[0];
+                }
+                return data;
             }
-        }, 1000);
-
-        window.onscroll = function() {
-            const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                scrollToTopBtn.style.display = "block";
-            } else {
-                scrollToTopBtn.style.display = "none";
-            }
-        };
-
-        function scrollToTop() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
+        });
     </script>
+
 </body>
-</html>
+                            </html>
