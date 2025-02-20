@@ -2,298 +2,303 @@
 <html lang="en">
 
 <head>
-    <title>FB LIVE UID CHECKER</title>
+    <title>FB LIVE UID CHECKER - Powered by GOODxVAMPIRE</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <!-- Facebook Icon -->
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" type="image/svg+xml">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        /* Global Styles */
         body {
-            background: url('https://i.ibb.co/P5WhjqD/1j6F.gif') no-repeat center center fixed;
-            background-size: cover;
-            filter: blur(0px);
-            color: #fff;
+            background: linear-gradient(135deg, #4dff91, #1d2b64);
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .btn {
-            font-weight: bold;
+            font-weight: 600;
         }
 
-        .title-of-site {
+        /* Buttons */
+        .btn-start {
+            background: #28a745;
             color: #fff;
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            font-size: 18px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
         }
 
-        .bg-primary {
-            background-color: #007bff !important;
+        .btn-start:hover {
+            background: #218838;
         }
 
-        .bg-success {
-            background-color: #28a745 !important;
+        .btn-copy {
+            background: #555;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .bg-danger {
-            background-color: #dc3545 !important;
+        .btn-copy:hover {
+            background: #333;
         }
 
-        .bg-warning {
-            background-color: #ffc107 !important;
-        }
-
-        textarea {
-            width: 200px;
-        }
-
-        .form-label {
-            color: #28a745;
-        }
-
+        /* Input & Text Area */
         .form-control {
             background-color: #333;
             color: #fff;
             border: 1px solid #444;
+            border-radius: 5px;
+            padding: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
 
         .form-control:focus {
-            background-color: #555;
-            color: #fff;
+            background-color: #444;
             border-color: #28a745;
+            outline: none;
         }
 
-        button {
-            background-color: #555;
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 14px;
             color: #fff;
-            border: none;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
         }
 
-        button:hover {
-            background-color: #28a745;
+        /* Menu */
+        .menu {
+            position: fixed;
+            bottom: 70px;
+            right: 10px;
+            background-color: #444;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
 
-        .glowing-text {
-            font-size: 20px;
-            font-weight: bold;
-            color: #fff;
-            animation: glow 1.5s infinite;
+        .menu:hover {
+            background-color: #333;
         }
 
-        @keyframes glow {
-            0% {
-                text-shadow: 0 0 5px rgb(255, 3, 121), 0 0 10px rgb(76, 175, 80), 0 0 20px rgb(76, 175, 80);
+        .menu .menu-items {
+            display: none;
+            position: absolute;
+            right: 60px;
+            bottom: 60px;
+            background-color: #333;
+            border-radius: 5px;
+            padding: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            min-width: 150px;
+        }
+
+        .menu:hover .menu-items {
+            display: block;
+        }
+
+        .menu-item {
+            margin: 10px 0;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            color: #28a745;
+        }
+
+        /* Media Queries for Mobile */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
             }
 
-            50% {
-                text-shadow: 0 0 20px rgb(76, 175, 80), 0 0 30px rgb(76, 175, 80), 0 0 40px rgb(76, 175, 80);
+            h1 {
+                font-size: 2rem;
             }
-
-            100% {
-                text-shadow: 0 0 5px rgb(76, 175, 80), 0 0 10px rgb(76, 175, 80), 0 0 20px rgb(76, 175, 80);
-            }
-        }
-
-        /* Progress Bar Styles */
-        .progress {
-            height: 20px;
-        }
-
-        .progress-bar {
-            width: 0%;
         }
     </style>
 </head>
 
 <body>
-    <div class="row">
-        <div class="d-flex flex-wrap justify-content-center align-items-center" style="text-align: center; position: relative;">
-            <h1 class="title-of-site" style="font-size: 2.5rem; color: #fff; text-shadow: 0 0 5px #f48a00, 0 0 10px #00b8f4, 0 0 15px #00b8f4;">
-                <i class="icofont-check-circled"></i> FB LIVE UID CHECKER
-            </h1>
+    <div class="container">
+        <!-- Three Dots Menu -->
+        <div class="menu">
+            <div class="menu-items">
+                <div class="menu-item" id="homeLink">Home</div>
+                <div class="menu-item" id="liveCheckerLink">Live UID Checker</div>
+                <div class="menu-item" id="qrCodeScannerLink">QR Code Scanner</div>
+            </div>
+            <span>...</span>
         </div>
 
-        <div class="col-12 d-flex justify-content-center">
-            <div class="d-flex">
-                <span class="btn mx-1 px-4 py-3 border rounded bg-primary text-white fw-bold" id="btnStart">
-                    <i class="icofont-ui-play"></i>
-                    Run
-                </span>
-                <span class="mx-1 px-4 py-3 border rounded bg-success text-white fw-bold">
-                    Live: <span id="liveCount">0</span>
-                </span>
-                <span class="mx-1 px-4 py-3 border rounded bg-danger text-white fw-bold">
-                    Dead: <span id="dieCount">0</span>
-                </span>
-                <span class="mx-1 px-4 py-3 border rounded bg-warning text-white fw-bold">
-                    Checked: <span id="totalCount">0</span> account
-                </span>
-            </div>
+        <!-- Main Content -->
+        <h1>FB LIVE UID CHECKER</h1>
+        <div class="d-flex justify-content-center mb-4">
+            <button class="btn btn-start" id="btnStart">
+                <i class="icofont-ui-play"></i> Run
+            </button>
         </div>
-    </div>
 
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="mb-3">
-                <div class="d-flex justify-content-between mb-2">
-                    <label for="" class="form-label fw-bold text-success">Enter a list of UIDs, one for each UID</label>
-                </div>
-                <textarea class="form-control" name="" id="listId" rows="10" autofocus></textarea>
-            </div>
+        <!-- UID Checker Form -->
+        <div class="mb-3">
+            <label class="form-label text-success fw-bold">Enter a list of UIDs, one for each UID:</label>
+            <textarea class="form-control" id="listId" rows="10" autofocus></textarea>
         </div>
-        <div class="col-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-2">
-                            <label for="" class="form-label fw-bold text-success">List of Live accounts</label>
-                            <button class="btn btn-secondary btn-sm" id="btnCopyLive"><b>Copy</b></button>
-                        </div>
-                        <textarea class="form-control" readonly name="" id="listLive" rows="10"></textarea>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-2">
-                            <label for="" class="form-label fw-bold text-danger">List of Dead accounts</label>
-                            <button class="btn btn-secondary btn-sm" id="btnCopyDie"><b>Copy</b></button>
-                        </div>
-                        <textarea class="form-control" readonly name="" id="listDie" rows="10"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Progress Bar -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" id="progressBar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label class="form-label text-success">List of Live accounts:</label>
+                <button class="btn btn-copy" id="btnCopyLive"><b>Copy</b></button>
+                <textarea class="form-control" id="listLive" readonly rows="10"></textarea>
             </div>
+            <div class="col-md-6">
+                <label class="form-label text-danger">List of Dead accounts:</label>
+                <button class="btn btn-copy" id="btnCopyDie"><b>Copy</b></button>
+                <textarea class="form-control" id="listDie" readonly rows="10"></textarea>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mb-4">
+            <span class="mx-3">Live: <span id="liveCount">0</span></span>
+            <span class="mx-3">Dead: <span id="dieCount">0</span></span>
+            <span class="mx-3">Checked: <span id="totalCount">0</span> accounts</span>
+        </div>
+
+        <div class="footer">
+            <p>Powered by <b>GOODxVAMPIRE</b></p>
         </div>
     </div>
 
     <script>
-        $(function() {
-            // Copy Live UIDs to clipboard
-            $("#btnCopyLive").click(function() {
-                $("#listLive").select();
-                document.execCommand('copy');
+        $(function () {
+            $("#homeLink").click(function () {
+                alert("Welcome to the FB Live UID Checker site!\nContact: goodxvampire@gmail.com");
             });
 
-            // Copy Dead UIDs to clipboard
-            $("#btnCopyDie").click(function() {
-                $("#listDie").select();
-                document.execCommand('copy');
+            $("#liveCheckerLink").click(function () {
+                alert("This is the Live UID Checker. Paste your UID list and click 'Run' to check the status.");
             });
 
-            let live = 0;
-            let dies = 0;
-            let c = 0;
-            let n = 0;
-            let arrclone;
+            $("#qrCodeScannerLink").click(function () {
+                alert("This feature allows you to scan a QR code, just like scanning a Wi-Fi QR to retrieve passwords.");
+            });
 
-            // Start button click handler
             $('#btnStart').click(() => {
-                const uids = $('#listId').val().trim().split(/\r?\n/);
-                
-                // Validate UID format
-                const validUids = uids.filter(uid => /^[0-9]{15,16}$/.test(uid));
-                if (validUids.length !== uids.length) {
-                    alert('Some UIDs are invalid. Ensure all UIDs are numeric and 15-16 digits long.');
+                if (!$('#listId').val().trim()) {
                     return;
                 }
 
-                // Disable start button to prevent multiple clicks
+                // Disable the start button to prevent re-clicking
                 $('#btnStart').prop('disabled', true);
 
-                // Reset counters and results
+                // Reset the lists and counters
                 $("#listLive").val('');
                 $("#listDie").val('');
                 $("#liveCount").html(0);
                 $("#dieCount").html(0);
-                $("#totalCount").html(validUids.length);
-                
-                live = 0;
-                dies = 0;
-                n = 0;
-                arrclone = validUids;
-                c = arrclone.length;
+                $("#totalCount").html(0);
 
-                // Start checking process
-                check_live_uid_progress();
+                let data = $('#listId').val().split(/\r?\n/);
+                data = [...new Set(data)];
+                data = data.filter(nx => nx);
+                let c = data.length;
+
+                $("#totalCount").html(c);
+                check_live_uid_progress(data);
             });
 
-            // Retry mechanism to handle failed UID fetches
-            function fetchUID(uid, retries = 3, delay = 1000) {
-                const url = `https://graph.facebook.com/${uid}/picture?type=normal`;
-
-                return new Promise((resolve, reject) => {
-                    fetch(url)
-                        .then(response => {
-                            if (/100x100/.test(response.url)) {
-                                resolve("live");
-                            } else {
-                                reject("dead");
-                            }
-                        })
-                        .catch(error => {
-                            if (retries > 0) {
-                                setTimeout(() => resolve(fetchUID(uid, retries - 1, delay)), delay);
-                            } else {
-                                reject("error");
-                            }
-                        });
-                });
-            }
-
             // Function to check live UIDs
-            function check_live_uid_progress() {
-                if (n < c) {
-                    const uid = arrclone[n];
+            function check_live_uid_progress(arrclone) {
+                let n = 0;
+                function fetchUID(uid, retries = 3, delay = 1000) {
+                    const url = `https://graph.facebook.com/${uid}/picture?type=normal`;
 
-                    fetchUID(uid)
-                        .then(status => {
-                            if (status === "live") {
-                                live++;
-                                $('#liveCount').html(live);
-                                $('#listLive').val($('#listLive').val() + uid + "\n");
-                            } else {
-                                dies++;
-                                $('#dieCount').html(dies);
-                                $('#listDie').val($('#listDie').val() + uid + "\n");
-                            }
-                            n++;
-
-                            // Update progress bar
-                            const progress = Math.floor((n / c) * 100);
-                            $('#progressBar').css('width', progress + '%').attr('aria-valuenow', progress);
-
-                            check_live_uid_progress();
-                        })
-                        .catch(error => {
-                            if (error === "error") {
-                                console.error(`Failed to check UID ${uid} after retries`);
-                            }
-                            dies++;
-                            $('#dieCount').html(dies);
-                            $('#listDie').val($('#listDie').val() + uid + "\n");
-                            n++;
-
-                            // Update progress bar
-                            const progress = Math.floor((n / c) * 100);
-                            $('#progressBar').css('width', progress + '%').attr('aria-valuenow', progress);
-
-                            check_live_uid_progress();
-                        });
-                } else {
-                    $('#btnStart').prop('disabled', false); // Re-enable start button when done
+                    return new Promise((resolve, reject) => {
+                        fetch(url)
+                            .then(response => {
+                                if (/100x100/.test(response.url)) {
+                                    resolve("live");
+                                } else {
+                                    reject("dead");
+                                }
+                            })
+                            .catch(error => {
+                                if (retries > 0) {
+                                    setTimeout(() => resolve(fetchUID(uid, retries - 1, delay)), delay);
+                                } else {
+                                    reject("error");
+                                }
+                            });
+                    });
                 }
+
+                // Function to check live UID progress
+                function check() {
+                    if (n < arrclone.length) {
+                        const uid = arrclone[n];
+                        fetchUID(uid)
+                            .then(status => {
+                                if (status === "live") {
+                                    $('#liveCount').html(parseInt($('#liveCount').html()) + 1);
+                                    $('#listLive').val($('#listLive').val() + uid + "\n");
+                                } else {
+                                    $('#dieCount').html(parseInt($('#dieCount').html()) + 1);
+                                    $('#listDie').val($('#listDie').val() + uid + "\n");
+                                }
+                                n++;
+                                check();
+                            })
+                            .catch(err => {
+                                n++;
+                                check();
+                            });
+                    } else {
+                        $('#btnStart').prop('disabled', false); // Enable button after processing
+                    }
+                }
+                check();
             }
         });
     </script>
-
 </body>
 
 </html>
