@@ -2,23 +2,18 @@
 <html lang="en">
 
 <head>
-    <title>FACEBOOK LIVE UID CHECKER</title>
-    <!-- Required meta tags -->
+    <title>FB LIVE UID CHECKER</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
-    <!-- Add jQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
         body {
-            background: url('https://i.ibb.co.com/P5WhjqD/1j6F.gif') no-repeat center center fixed;
+            background: url('https://i.ibb.co/P5WhjqD/1j6F.gif') no-repeat center center fixed;
             background-size: cover;
-            filter: blur(0px); /* Optional: Add blur to the background */
+            filter: blur(0px);
             color: #fff;
             margin: 0;
             padding: 0;
@@ -89,14 +84,24 @@
             0% {
                 text-shadow: 0 0 5px rgb(255, 3, 121), 0 0 10px rgb(76, 175, 80), 0 0 20px rgb(76, 175, 80);
             }
+
             50% {
                 text-shadow: 0 0 20px rgb(76, 175, 80), 0 0 30px rgb(76, 175, 80), 0 0 40px rgb(76, 175, 80);
             }
+
             100% {
                 text-shadow: 0 0 5px rgb(76, 175, 80), 0 0 10px rgb(76, 175, 80), 0 0 20px rgb(76, 175, 80);
             }
         }
 
+        /* Progress Bar Styles */
+        .progress {
+            height: 20px;
+        }
+
+        .progress-bar {
+            width: 0%;
+        }
     </style>
 </head>
 
@@ -107,7 +112,6 @@
                 <i class="icofont-check-circled"></i> FB LIVE UID CHECKER
             </h1>
         </div>
-
 
         <div class="col-12 d-flex justify-content-center">
             <div class="d-flex">
@@ -155,24 +159,30 @@
                             <button class="btn btn-secondary btn-sm" id="btnCopyDie"><b>Copy</b></button>
                         </div>
                         <textarea class="form-control" readonly name="" id="listDie" rows="10"></textarea>
-    <div class="row">
-        <div class="d-flex flex-wrap justify-content-center align-items-center" style="text-align: center; position: relative;">
-            <h1 class="title-of-site" style="font-size: 2.5rem; color: #fff; text-shadow: 0 0 5px #f48a00, 0 0 10px #00b8f4, 0 0 15px #00b8f4;">
-                <i class="icofont-check-circled"></i> DARK SERIES XYLON
-            </h1>                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Progress Bar -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" id="progressBar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(function() {
+            // Copy Live UIDs to clipboard
             $("#btnCopyLive").click(function() {
                 $("#listLive").select();
                 document.execCommand('copy');
             });
 
+            // Copy Dead UIDs to clipboard
             $("#btnCopyDie").click(function() {
                 $("#listDie").select();
                 document.execCommand('copy');
@@ -181,98 +191,109 @@
             let live = 0;
             let dies = 0;
             let c = 0;
-            let n;
+            let n = 0;
             let arrclone;
 
+            // Start button click handler
             $('#btnStart').click(() => {
-                if (!$('#listId').val().trim()) {
+                const uids = $('#listId').val().trim().split(/\r?\n/);
+                
+                // Validate UID format
+                const validUids = uids.filter(uid => /^[0-9]{15,16}$/.test(uid));
+                if (validUids.length !== uids.length) {
+                    alert('Some UIDs are invalid. Ensure all UIDs are numeric and 15-16 digits long.');
                     return;
                 }
 
-                // Disable the start button to prevent re-clicking
+                // Disable start button to prevent multiple clicks
                 $('#btnStart').prop('disabled', true);
 
-                // Reset the lists and counters
-                $("#listLive").val('');  // Ensure it's set to empty
-                $("#listDie").val('');   // Ensure it's set to empty
-                $("#liveCount").html(0);  // Reset live count to 0
-                $("#dieCount").html(0);   // Reset dead count to 0
-                $("#totalCount").html(0); // Reset total count to 0
-
-                dies = 0;
+                // Reset counters and results
+                $("#listLive").val('');
+                $("#listDie").val('');
+                $("#liveCount").html(0);
+                $("#dieCount").html(0);
+                $("#totalCount").html(validUids.length);
+                
                 live = 0;
+                dies = 0;
                 n = 0;
-
-                let data = $('#listId').val().split(/\r?\n/);
-                data = [...new Set(data)]; // Remove duplicates
-                data = data.filter(nx => nx); // Remove empty lines
-                arrclone = data;
+                arrclone = validUids;
                 c = arrclone.length;
 
-                $("#totalCount").html(c);
-
-                // Run the checking process 20 times concurrently
-                for (let i = 0; i < 20; i++) {
-                    check_live_uid_progress();
-                }
-
-                $("#listId").val(data.join("\n"));
+                // Start checking process
+                check_live_uid_progress();
             });
 
-            function check_live_uid_progress() {
-                $("#dieCount").html(dies);
-                n = n + 1;
-                var m = n - 1;
+            // Retry mechanism to handle failed UID fetches
+            function fetchUID(uid, retries = 3, delay = 1000) {
+                const url = `https://graph.facebook.com/${uid}/picture?type=normal`;
 
-                if (!arrclone[m]) return;
-                var uid = get_uid(arrclone[m]);
-                var url = 'https://graph.facebook.com/' + uid + '/picture?type=normal';
-
-                fetch(url).then((response) => {
-                    if (/100x100/.test(response.url)) {
-                        live++;
-                        $('#liveCount').html(live);
-                        // Use val() to modify the textarea content
-                        var currentLiveContent = $('#listLive').val();
-                        $('#listLive').val(currentLiveContent + arrclone[m] + "\n");
-                    } else {
-                        dies++;
-                        $('#dieCount').html(dies);
-                        // Use val() to modify the textarea content
-                        var currentDieContent = $('#listDie').val();
-                        $('#listDie').val(currentDieContent + arrclone[m] + "\n");
-                    }
-
-                    // Continue checking if there are more UIDs
-                    if (n < c) {
-                        check_live_uid_progress();
-                    } else {
-                        // Re-enable the start button once done
-                        $('#btnStart').prop('disabled', false);
-                    }
-                }).catch((err) => {
-                    console.error("Error fetching UID: ", err);
-                    dies++; // Count as dead if an error occurs
-                    $('#dieCount').html(dies);
-                    var currentDieContent = $('#listDie').val();
-                    $('#listDie').val(currentDieContent + arrclone[m] + "\n");
-                    if (n < c) {
-                        check_live_uid_progress();
-                    } else {
-                        $('#btnStart').prop('disabled', false);
-                    }
+                return new Promise((resolve, reject) => {
+                    fetch(url)
+                        .then(response => {
+                            if (/100x100/.test(response.url)) {
+                                resolve("live");
+                            } else {
+                                reject("dead");
+                            }
+                        })
+                        .catch(error => {
+                            if (retries > 0) {
+                                setTimeout(() => resolve(fetchUID(uid, retries - 1, delay)), delay);
+                            } else {
+                                reject("error");
+                            }
+                        });
                 });
             }
 
-            function get_uid(data) {
-                if (data && data.includes("|")) {
-                    var clone = data.split("|");
-                    return clone[0];
+            // Function to check live UIDs
+            function check_live_uid_progress() {
+                if (n < c) {
+                    const uid = arrclone[n];
+
+                    fetchUID(uid)
+                        .then(status => {
+                            if (status === "live") {
+                                live++;
+                                $('#liveCount').html(live);
+                                $('#listLive').val($('#listLive').val() + uid + "\n");
+                            } else {
+                                dies++;
+                                $('#dieCount').html(dies);
+                                $('#listDie').val($('#listDie').val() + uid + "\n");
+                            }
+                            n++;
+
+                            // Update progress bar
+                            const progress = Math.floor((n / c) * 100);
+                            $('#progressBar').css('width', progress + '%').attr('aria-valuenow', progress);
+
+                            check_live_uid_progress();
+                        })
+                        .catch(error => {
+                            if (error === "error") {
+                                console.error(`Failed to check UID ${uid} after retries`);
+                            }
+                            dies++;
+                            $('#dieCount').html(dies);
+                            $('#listDie').val($('#listDie').val() + uid + "\n");
+                            n++;
+
+                            // Update progress bar
+                            const progress = Math.floor((n / c) * 100);
+                            $('#progressBar').css('width', progress + '%').attr('aria-valuenow', progress);
+
+                            check_live_uid_progress();
+                        });
+                } else {
+                    $('#btnStart').prop('disabled', false); // Re-enable start button when done
                 }
-                return data;
             }
         });
     </script>
 
 </body>
-                            </html>
+
+</html>
